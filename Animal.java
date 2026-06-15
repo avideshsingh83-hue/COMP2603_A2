@@ -67,7 +67,9 @@ public abstract class Animal {
         return this.healthStatus;
     }
 
-    // TODO M2: Write setIsland(String island) method
+    public void setIsland(String island){
+        this.island = island;
+    }
 
     // TODO M4: Write getSightings() getter that returns the ArrayList<String>
 
@@ -77,16 +79,8 @@ public abstract class Animal {
         }
     }
 
-    /**
-     * Returns the animal type: "Bird", "Reptile", or "Marine".
-     * TODO M2: Declare as abstract
-     */
     public abstract String getType();
 
-    /**
-     * Returns the daily food cost in TTD. Varies by subclass.
-     * TODO M2: Declare as abstract
-     */
     public abstract double getDailyFoodCostTTD();
 
     @Override
