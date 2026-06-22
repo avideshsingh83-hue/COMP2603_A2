@@ -13,15 +13,8 @@ public abstract class Animal {
     private double weightKg;
     private String healthStatus;
 
-    // TODO M4: Declare private ArrayList<String> sightings field
+    private ArrayList<String> sightings;
 
-    /**
-     * Constructor: assigns auto-incremented ID, validates all parameters.
-     * Species, nickname, island must not be null or empty.
-     * weightKg must be > 0.
-     * healthStatus must be "Healthy", "Injured", or "Critical".
-     * TODO M4: Initialize sightings list
-     */
     public Animal(String species, String nickname, String island, double weightKg, String healthStatus) {
         if(species == null){
             throw new IllegalArgumentException("Species cannot be null");
@@ -40,7 +33,8 @@ public abstract class Animal {
         }
         animalId = nextId;
         nextId = nextId + 1;
-        // TODO M4: Initialize sightings ArrayList
+        
+        sightings = new ArrayList<>();
     }
 
     public int getAnimalId() {
@@ -71,7 +65,9 @@ public abstract class Animal {
         this.island = island;
     }
 
-    // TODO M4: Write getSightings() getter that returns the ArrayList<String>
+    protected ArrayList<String> getSightings() {
+        return this.sightings;
+    }
 
     public void updateHealth(String newStatus) {
         if(newStatus.equals("Healthy") || newStatus.equals("Injured") || newStatus.equals("Critical")){
