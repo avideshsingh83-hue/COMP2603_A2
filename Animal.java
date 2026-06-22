@@ -84,23 +84,20 @@ public abstract class Animal {
         return String.format("#%03d %s '%s' (%s) [%s] %.2f kg - %s", animalId, species, nickname, island, getType(), weightKg, healthStatus);
     }
 
-    /**
-     * Two animals are equal if they have the same animalId.
-     *
-     * TODO M5: Implement equals
-     */
     @Override
     public boolean equals(Object obj) {
-        // TODO M5: Implement equality by animalId
-        return false;
+        if(this == obj){
+            return true;
+        }
+        if(!(obj instanceof Animal)){
+            return false;
+        }
+        Animal other = (Animal) obj;
+        return this.animalId == other.animalId;
     }
 
-    /**
-     * TODO M5: Implement hashCode based on animalId
-     */
     @Override
     public int hashCode() {
-        // TODO M5: Return hash based on animalId
-        return 0;
+        return Integer.hashCode(animalId);
     }
 }
