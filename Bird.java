@@ -1,9 +1,4 @@
-/**
- * Bird subclass. Implements Trackable and Relocatable.
- *
- * TODO M3: Make this class implement Trackable and Relocatable
- */
-public class Bird extends Animal /* TODO M3: implements Trackable, Relocatable */ {
+public class Bird extends Animal implements Trackable, Relocatable {
     private double wingspanCm;
     private boolean canFly;
 
