@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *   CENTER: Scrollable text area showing results
  *   SOUTH:  Status label showing match count
  */
-public class SanctuaryGUI extends JFrame {
+public class SanctuaryGUI extends JFrame implements ActionListener, KeyListener {
     private Sanctuary sanctuary;
 
     private JTextField nameField;
@@ -46,9 +46,25 @@ public class SanctuaryGUI extends JFrame {
         statusLabel = new JLabel("Ready");
         add(statusLabel, BorderLayout.SOUTH);
 
-        // TODO M11: Add ActionListener to searchButton that calls runSearch()
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                runSearch();
+            }
+        });
+       
+        nameField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                runSearch();
+            }
 
-        // TODO M11: Add KeyListener to nameField that calls runSearch() on keyReleased
+            @Override
+            public void keyTyped(KeyEvent e) {}
+
+            @Override
+            public void keyPressed(KeyEvent e) {}
+        });
 
         setLocationRelativeTo(null);
     }
@@ -58,26 +74,41 @@ public class SanctuaryGUI extends JFrame {
         setTitle("Caribbean Wildlife Conservation Tracker - " + s.getName());
     }
 
-    /**
-     * Filters the sanctuary's animals based on the GUI controls and
-     * displays matching results.
-     *
-     * TODO M11: Implement runSearch
-     *
-     * Steps:
-     * 1. Get text from nameField (trim, convert to lowercase)
-     * 2. Get selected type from typeCombo
-     * 3. Get checkbox state from injuredCheck
-     * 4. Loop through sanctuary's animals:
-     *    - If text is non-empty, keep only animals whose species or nickname
-     *      contains the text (case-insensitive)
-     *    - If type is not "All", keep only matching type
-     *    - If checkbox is selected, keep only "Injured" or "Critical" animals
-     * 5. Build result string and set in resultArea
-     * 6. Set statusLabel: "No matches", "1 result", or "N results"
-     */
     private void runSearch() {
-        // TODO M11: Implement filtering and display
+        String name = nameField.getText().trim().toLowerCase();
+        String type = (String) typeCombo.getSelectedItem();
+        boolean injuredOnly = injuredCheck.isSelected();
+
+        ArrayList<Animal> results = new ArrayList<>();
+        for (Animal a : sanctuary.getAnimals()) {
+            boolean matches = true;
+            if (!name.isEmpty() && !a.getSpecies().toLowerCase().contains(name) && !a.getNickname().toLowerCase().contains(name)) {
+                matches = false;
+            }
+            if (!type.equals("All") && !a.getType().equals(type)) {
+                matches = false;
+            }
+            if (injuredOnly && !a.getHealthStatus().equals("Injured") && !a.getHealthStatus().equals("Critical")) {
+                matches = false;
+            }
+            if (matches) {
+                results.add(a);
+            }
+        }
+
+        // Build result string
+        StringBuilder sb = new StringBuilder();
+        for (Animal a : results) {
+            sb.append(a.toString()).append("\n");
+        }
+        resultArea.setText(sb.toString());
+
+        // Update status label
+        if (results.isEmpty()) {
+            statusLabel.setText("No matches");
+        } else {
+            statusLabel.setText(results.size() + " result" + (results.size() > 1 ? "s" : ""));
+        }
     }
 
     /**
