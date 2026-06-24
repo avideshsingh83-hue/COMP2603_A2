@@ -72,15 +72,14 @@ public class Sanctuary {
         return Math.round(total * 100.0) / 100.0;
     }
 
-    /**
-     * Returns all animals that implement the Relocatable interface.
-     * Hint: use instanceof.
-     *
-     * TODO M8: Implement getRelocatableAnimals
-     */
     public ArrayList<Animal> getRelocatableAnimals() {
-        // TODO M8: Filter using instanceof Relocatable]
-        return new ArrayList<Animal>();
+        ArrayList<Animal> relocatableAnimals = new ArrayList<Animal>();
+        for (Animal a : animals) {
+            if (a instanceof Relocatable) {
+                relocatableAnimals.add(a);
+            }
+        }
+        return relocatableAnimals;
     }
 
     public Animal getMostExpensiveAnimal() {
@@ -95,21 +94,22 @@ public class Sanctuary {
         return mostExpensive;
     }
 
-    /**
-     * Transfers an animal to another sanctuary.
-     * If the animal does not implement Relocatable, the transfer fails:
-     * re-add the animal to this sanctuary and return false.
-     * Otherwise, call relocateTo on the animal, then addAnimal on target.
-     *
-     * TODO M8: Implement transferAnimal
-     */
     public boolean transferAnimal(int animalId, Sanctuary target) {
-        // TODO M8: Remove animal, check Relocatable, relocate, add to target
-        return false;
+        Animal animalToTransfer = removeAnimal(animalId);
+        if(animalToTransfer == null){
+            return false;
+        }
+        if(!(animalToTransfer instanceof Relocatable)){
+            addAnimal(animalToTransfer);
+            return false;
+        }
+        ((Relocatable) animalToTransfer).relocateTo(target.getIsland());
+        target.addAnimal(animalToTransfer);
+        return true;
     }
 
     public void printRoster() {
-        for(Animal a : animals){){
+        for(Animal a : animals){
             System.out.println("  " + a.toString());
         }
     }
