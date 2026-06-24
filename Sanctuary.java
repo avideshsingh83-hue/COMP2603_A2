@@ -34,7 +34,7 @@ public class Sanctuary {
     }
 
     public boolean addAnimal(Animal a) {
-        if((a == null) || (animals.size() >= capacity) || (!a.getIsland().equals(island))){
+        if((a == null) || (animals.size() >= capacity) || (!this.island.equals(a.getIsland()))){
             return false;
         }
         animals.add(a);

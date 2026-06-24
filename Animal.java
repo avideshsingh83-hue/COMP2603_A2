@@ -31,6 +31,12 @@ public abstract class Animal {
         if(!healthStatus.equals("Healthy") && !healthStatus.equals("Injured") && !healthStatus.equals("Critical")){
             throw new IllegalArgumentException("Health status must be 'Healthy', 'Injured', or 'Critical'");
         }
+        this.species = species;
+        this.nickname = nickname;
+        this.island = island;
+        this.weightKg = weightKg;
+        this.healthStatus = healthStatus;
+        
         animalId = nextId;
         nextId = nextId + 1;
         
