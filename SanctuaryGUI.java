@@ -12,35 +12,39 @@ import java.util.ArrayList;
  *   SOUTH:  Status label showing match count
  */
 public class SanctuaryGUI extends JFrame {
-    // TODO M10: Declare private Sanctuary field
+    private Sanctuary sanctuary;
 
-    // TODO M9: Declare GUI components:
-    //   JTextField nameField
-    //   JComboBox<String> typeCombo
-    //   JCheckBox injuredCheck
-    //   JButton searchButton
-    //   JTextArea resultArea
-    //   JLabel statusLabel
+    private JTextField nameField;
+    private JComboBox<String> typeCombo;
+    private JCheckBox injuredCheck;
+    private JButton searchButton;
+    private JTextArea resultArea;
+    private JLabel statusLabel;
 
     public SanctuaryGUI() {
         super("Caribbean Wildlife Conservation Tracker");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(700, 500);
 
-        // TODO M9: Set layout to BorderLayout
+        setLayout(new BorderLayout());
 
-        // TODO M9: Build NORTH panel (FlowLayout)
-        //   Add JLabel "Search:", JTextField (14 columns), JLabel "Type:",
-        //   JComboBox with {"All","Bird","Reptile","Marine"},
-        //   JCheckBox "Injured/Critical only", JButton "Search"
-        //   Add panel to NORTH
+        JPanel northPanel = new JPanel(new FlowLayout());
+        northPanel.add(new JLabel("Search:"));
+        northPanel.add(nameField = new JTextField(14));
+        northPanel.add(new JLabel("Type:"));
+        northPanel.add(typeCombo = new JComboBox<>(new String[]{"All", "Bird", "Reptile", "Marine"}));
+        northPanel.add(injuredCheck = new JCheckBox("Injured/Critical only"));
+        northPanel.add(searchButton = new JButton("Search"));
+        add(northPanel, BorderLayout.NORTH);
 
-        // TODO M9: Build CENTER
-        //   Create JTextArea, set monospaced font, make non-editable
-        //   Wrap in JScrollPane, add to CENTER
+        resultArea = new JTextArea();
+        resultArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        resultArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(resultArea);
+        add(scrollPane, BorderLayout.CENTER);
 
-        // TODO M9: Build SOUTH
-        //   Create JLabel "Ready", add to SOUTH
+        statusLabel = new JLabel("Ready");
+        add(statusLabel, BorderLayout.SOUTH);
 
         // TODO M11: Add ActionListener to searchButton that calls runSearch()
 
@@ -49,13 +53,9 @@ public class SanctuaryGUI extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    /**
-     * Stores the Sanctuary to search over.
-     * TODO M10: Implement setModel
-     */
     public void setModel(Sanctuary s) {
-        // TODO M10: Store the sanctuary reference
-        // TODO M10: Optionally update the window title
+        this.sanctuary = s;
+        setTitle("Caribbean Wildlife Conservation Tracker - " + s.getName());
     }
 
     /**
