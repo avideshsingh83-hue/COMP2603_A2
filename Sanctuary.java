@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -53,24 +54,22 @@ public class Sanctuary {
         return animals.size();
     }
 
-    /**
-     * Returns a new ArrayList containing only animals of the given type.
-     *
-     * TODO M7: Implement getAnimalsOfType
-     */
     public ArrayList<Animal> getAnimalsOfType(String type) {
-        // TODO M7: Filter by getType()
-        return new ArrayList<Animal>();
+        ArrayList<Animal> filteredAnimals = new ArrayList<Animal>();
+        for (Animal a : animals) {
+            if (a.getType().equals(type)) {
+                filteredAnimals.add(a);
+            }
+        }
+        return filteredAnimals;
     }
 
-    /**
-     * Returns the total daily food cost for all animals, rounded to 2 decimal places.
-     *
-     * TODO M7: Implement getDailyFoodBudget
-     */
     public double getDailyFoodBudget() {
-        // TODO M7: Sum getDailyFoodCostTTD() for all animals
-        return 0.0;
+        double total = 0.0;
+        for (Animal a : animals) {
+            total = total + a.getDailyFoodCostTTD();
+        }
+        return Math.round(total * 100.0) / 100.0;
     }
 
     /**
@@ -80,18 +79,20 @@ public class Sanctuary {
      * TODO M8: Implement getRelocatableAnimals
      */
     public ArrayList<Animal> getRelocatableAnimals() {
-        // TODO M8: Filter using instanceof Relocatable
+        // TODO M8: Filter using instanceof Relocatable]
         return new ArrayList<Animal>();
     }
 
-    /**
-     * Returns the animal with the highest daily food cost, or null if empty.
-     *
-     * TODO M7: Implement getMostExpensiveAnimal
-     */
     public Animal getMostExpensiveAnimal() {
-        // TODO M7: Find max by getDailyFoodCostTTD()
-        return null;
+        Animal mostExpensive = null;
+        double highestCost = 0.0;
+        for(Animal a: animals){
+            if(a.getDailyFoodCostTTD() > highestCost){
+                highestCost = a.getDailyFoodCostTTD();
+                mostExpensive = a;
+            }
+        }
+        return mostExpensive;
     }
 
     /**
