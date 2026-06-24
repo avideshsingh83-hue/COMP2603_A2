@@ -1,8 +1,5 @@
 import java.util.ArrayList;
 
-/**
- * Abstract base class for all animals in the conservation system.
- */
 public abstract class Animal implements Comparable<Animal>{
     private static int nextId = 1;
 

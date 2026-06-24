@@ -61,4 +61,5 @@ public class Marine extends Animal implements Trackable, Relocatable {
     public void relocateTo(String island) {
         setIsland(island);
     }
+    
 }

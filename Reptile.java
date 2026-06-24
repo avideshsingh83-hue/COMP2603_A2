@@ -43,4 +43,5 @@ public class Reptile extends Animal implements Trackable {
         }
         return getSightings().get(getSightings().size() - 1);
     }
+    
 }

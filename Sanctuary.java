@@ -2,9 +2,6 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * Manages a collection of animals at a single location.
- */
 public class Sanctuary {
     private String name;
     private String island;

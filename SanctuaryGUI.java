@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class SanctuaryGUI extends JFrame {
     private Sanctuary sanctuary;
-
     private JTextField nameField;
     private JComboBox<String> typeCombo;
     private JCheckBox injuredCheck;
