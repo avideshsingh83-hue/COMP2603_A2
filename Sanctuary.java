@@ -123,4 +123,14 @@ public class Sanctuary {
     public void getSortedRoster(){
         Collections.sort(animals);
     }
+
+    public String findAnimalById(int id){
+        for(Animal a : animals){
+            if(a.getAnimalId() == id){
+                String z = a.getSpecies();
+                return z;
+            }
+        }
+        return null;
+    }
 }
