@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * Abstract base class for all animals in the conservation system.
  */
-public abstract class Animal {
+public abstract class Animal implements Comparable<Animal>{
     private static int nextId = 1;
 
     private int animalId;
@@ -36,7 +36,7 @@ public abstract class Animal {
         this.island = island;
         this.weightKg = weightKg;
         this.healthStatus = healthStatus;
-        
+
         animalId = nextId;
         nextId = nextId + 1;
         
@@ -105,5 +105,10 @@ public abstract class Animal {
     @Override
     public int hashCode() {
         return Integer.hashCode(animalId);
+    }
+
+    @Override
+    public int compareTo(Animal other) {
+        return this.nickname.compareTo(other.nickname);
     }
 }

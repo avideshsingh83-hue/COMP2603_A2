@@ -1,5 +1,6 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Manages a collection of animals at a single location.
@@ -117,5 +118,9 @@ public class Sanctuary {
     @Override
     public String toString() {
         return "" + name + " (" + island + ") [" + getAnimalCount() + "/" + capacity + " animals]";
+    }
+
+    public void getSortedRoster(){
+        Collections.sort(animals);
     }
 }
