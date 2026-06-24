@@ -34,8 +34,8 @@ public class Driver {
         System.out.println();
 
         System.out.println("=== Daily food budgets ===");
-        System.out.println(caroni.getName() + ": " + caroni.getDailyFoodBudget() + " TTD\n");
-        System.out.println(blueLagoon.getName() + ": " + blueLagoon.getDailyFoodBudget() + " TTD\n");
+        System.out.println(caroni.getName() + ": $" + caroni.getDailyFoodBudget() + "0 TTD");
+        System.out.println(blueLagoon.getName() + ": $" + blueLagoon.getDailyFoodBudget() + "0 TTD\n");
 
         System.out.println("=== Birds at Caroni ===");
         ArrayList<Animal> caroniBirds = caroni.getAnimalsOfType("Bird");
@@ -65,28 +65,28 @@ public class Driver {
         System.out.println("=== Transfer Atlas to Blue Lagoon ===");
         boolean transferResult = caroni.transferAnimal(atlas.getAnimalId(), blueLagoon);
         if (transferResult) {
-            System.out.println("Transfer successful.");
+            System.out.println("Transfer successful: true");
         } else {
-            System.out.println("Transfer failed.");
+            System.out.println("Transfer successful: false");
         }
         blueLagoon.printRoster();
         System.out.println();
 
         System.out.println("=== Attempt to transfer Brutus (Reptile) ===");
         if (caroni.transferAnimal(brutus.getAnimalId(), blueLagoon)) {
-            System.out.println("Transfer successful.");
+            System.out.println("Transfer successful: true");
         } else {
-            System.out.println("Transfer failed.");
+            System.out.println("Transfer successful: false");
         }
         System.out.println();
 
         System.out.println("=== Most expensive animal at each sanctuary ===");
-        System.out.println(caroni.getName() + ": " + caroni.getMostExpensiveAnimal());
-        System.out.println(blueLagoon.getName() + ": " + blueLagoon.getMostExpensiveAnimal());
+        System.out.println(caroni.getName() + ": " + caroni.getMostExpensiveAnimal() +" ($" + caroni.getMostExpensiveAnimal().getDailyFoodCostTTD() + "0 TTD/day)");
+        System.out.println(blueLagoon.getName() + ": " + blueLagoon.getMostExpensiveAnimal() +" ($" + blueLagoon.getMostExpensiveAnimal().getDailyFoodCostTTD() + "0 TTD/day)");
         System.out.println();
 
         System.out.println("=== Updated food budgets ===");
-        System.out.println(caroni.getName() + ": " + caroni.getDailyFoodBudget() + " TTD");
-        System.out.println(blueLagoon.getName() + ": " + blueLagoon.getDailyFoodBudget() + " TTD");
+        System.out.println(caroni.getName() + ": $" + caroni.getDailyFoodBudget() + "0 TTD");
+        System.out.println(blueLagoon.getName() + ": $" + blueLagoon.getDailyFoodBudget() + "0 TTD");
     }
 }
