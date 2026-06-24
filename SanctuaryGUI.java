@@ -3,15 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-/**
- * Swing GUI for searching and viewing animals in a sanctuary.
- *
- * Layout:
- *   NORTH:  Search field, type combo box, injured checkbox, search button
- *   CENTER: Scrollable text area showing results
- *   SOUTH:  Status label showing match count
- */
-public class SanctuaryGUI extends JFrame implements ActionListener, KeyListener {
+public class SanctuaryGUI extends JFrame {
     private Sanctuary sanctuary;
 
     private JTextField nameField;
@@ -53,20 +45,12 @@ public class SanctuaryGUI extends JFrame implements ActionListener, KeyListener 
             }
         });
        
-        nameField.addKeyListener(new KeyListener() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                runSearch();
-            }
-
-            @Override
-            public void keyTyped(KeyEvent e) {}
-
-            @Override
-            public void keyPressed(KeyEvent e) {}
+        nameField.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    runSearch();
+                }
         });
-
-        setLocationRelativeTo(null);
     }
 
     public void setModel(Sanctuary s) {
@@ -96,14 +80,12 @@ public class SanctuaryGUI extends JFrame implements ActionListener, KeyListener 
             }
         }
 
-        // Build result string
         StringBuilder sb = new StringBuilder();
         for (Animal a : results) {
             sb.append(a.toString()).append("\n");
         }
         resultArea.setText(sb.toString());
 
-        // Update status label
         if (results.isEmpty()) {
             statusLabel.setText("No matches");
         } else {
@@ -111,12 +93,24 @@ public class SanctuaryGUI extends JFrame implements ActionListener, KeyListener 
         }
     }
 
-    /**
-     * Creates a demo sanctuary, populates it, and launches the GUI.
-     *
-     * TODO M12: Implement main method
-     */
     public static void main(String[] args) {
-        // TODO M12: Create Sanctuary, add animals, create GUI, wire model, show
+        Sanctuary caroni = new Sanctuary("Caroni Bird Sanctuary", "Trinidad", 20);
+        Bird ruby = new Bird("Scarlet Ibis", "Ruby", "Trinidad", 0.35, "Healthy", 60.0, true);
+        Bird blaze = new Bird("Scarlet Ibis", "Blaze", "Trinidad", 0.40, "Healthy", 58.0, true);
+        Bird dusty = new Bird("Cocrico", "Dusty", "Trinidad", 0.25, "Injured", 30.0, true);
+        Reptile brutus = new Reptile("Spectacled Caiman", "Brutus", "Trinidad", 45.0, "Healthy", false, 180.0);
+        Reptile medusa = new Reptile("Green Anaconda", "Medusa", "Trinidad", 30.0, "Critical", false, 350.0);
+        Marine atlas = new Marine("Leatherback Turtle", "Atlas", "Trinidad", 500.0, "Healthy", 1200.0, 8000);
+
+        caroni.addAnimal(ruby);
+        caroni.addAnimal(blaze);
+        caroni.addAnimal(dusty);
+        caroni.addAnimal(brutus);
+        caroni.addAnimal(medusa);
+        caroni.addAnimal(atlas);
+
+        SanctuaryGUI gui = new SanctuaryGUI();
+        gui.setModel(caroni);
+        gui.setVisible(true);
     }
 }
